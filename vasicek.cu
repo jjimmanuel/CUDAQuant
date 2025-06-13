@@ -32,7 +32,7 @@ __global__ void vasicek(float *results, curandState *states, int numSteps, float
 	results[idx * numSteps] = r;
 
 	for (int i = 1; i < numSteps; i++) {
-		float Z = curand_normal(*localState);
+		float Z = curand_normal(&localState);
 		r += a * (b - r) * dt + sigma * sqrtf(dt) * Z;
 		results[idx * numSteps + i] = r;
 	}
