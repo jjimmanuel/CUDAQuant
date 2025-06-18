@@ -24,7 +24,7 @@ __global__ void vasicek(float *results, curandState *states, int numSteps, float
 			float a, float b, float sigma, float r0) {
 
 	int idx = blockDim.x * blockIdx.x + threadIdx.x;
-	if (idx >= numSteps) return;
+	if (idx >= numPaths) return;
 
 	curandState localState = states[idx]; 
 	
@@ -33,7 +33,7 @@ __global__ void vasicek(float *results, curandState *states, int numSteps, float
 
 	for (int i = 1; i < numSteps; i++) {
 		float Z = curand_normal(&localState);
-		r += a * (b - r) * dt + sigma * sqrtf(dt) * Z;
+		r = b + (r - b) * expf(-a * dt) + sigma * sqrtf((1.0f - expf(-2.0f * a * dt)) / (2.0f * a)) * Z;
 		results[idx * numSteps + i] = r;
 	}
 
