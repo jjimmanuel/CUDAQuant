@@ -8,3 +8,4 @@ Current Files:
 
 3. Vasicek: implementaion of the Vasicek model (short term rate). I used the exact discretization rather than the Euler method to eliminate discretization error. It is straightforward to calculate unlike with Hull-White. 
 
+4. CIR: Implementation of the Cox Ingersoll Ross model. I used the exact discretization
