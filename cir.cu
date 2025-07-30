@@ -33,7 +33,7 @@ __global__ void cir(curandState *states, float *results, float kappa, float thet
 	float r = r0;
 	results[idx * (numSteps + 1)] = r;
 
-	
+	// The non-central chi squared distribution can be simulated using the a poisson random variable with a specific mean and a gamma random variable
 	for (int i = 0; i < numSteps; ++i) {
 		float c = (sigma * sigma * (1.0 - exp(-kappa * dt))) / (4.0 * kappa);
 		float d = (4.0 * kappa * theta) / (sigma * sigma);
